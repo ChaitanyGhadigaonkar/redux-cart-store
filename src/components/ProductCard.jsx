@@ -1,23 +1,17 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/cartSlice";
 import { toast } from "react-hot-toast";
 
 const ProductCart = ({ product }) => {
-  const [favorite, setFavorite] = useState(FavoriteBorderIcon);
-
   const dispatch = useDispatch();
   const handleOnAddToCart = () => {
     dispatch(addItem(product));
     toast.success("Item added successfully");
   };
-
   return (
     <div className="cart relative flex flex-col my-2 border-sky-100 w-72 rounded-md shadow-md md:w-56">
       <div className="top flex items-center justify-center">
@@ -25,11 +19,11 @@ const ProductCart = ({ product }) => {
       </div>
       <div className="middle px-2 py-3">
         <p className="name font-semibold py-1">
-          {product.title.length > 30 ? (
-            <p>{product.title.slice(0, 30) + "..."}</p>
-          ) : (
-            <p>{product.title}</p>
-          )}
+          {product.title.length > 30 ? 
+            product.title.slice(0, 30) + "..."
+           : 
+            product.title
+          }
         </p>
         <div className="description text-sm">
           {product.description.length > 131 ? (
@@ -61,11 +55,6 @@ const ProductCart = ({ product }) => {
             Add To Cart
           </button>
         </div>
-      </div>
-      <div className="favorite absolute top-2 right-2 hover:cursor-pointer">
-        <p className="text-[#dc3545]">
-          <FavoriteIcon />
-        </p>
       </div>
     </div>
   );

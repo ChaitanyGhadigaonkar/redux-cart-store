@@ -34,7 +34,7 @@ function App() {
       <BrowserRouter>
         <div className="flex flex-col justify-between">
           <Navbar />
-          <Spinner loading={loading} />
+          {/* <Spinner loading={loading} /> */}
           <div className="w-[90%] m-auto sm:w-[100%] sm:px-2 md:w-[100%] md:px-5 lg:w-[90%]">
             <Routes>
               <Route
