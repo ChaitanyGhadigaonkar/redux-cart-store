@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      'rubik':['Rubik']
+    }
   },
   plugins: [],
 }

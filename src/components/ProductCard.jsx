@@ -1,19 +1,24 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { addToTheTotal } from "../store/amountSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../store/cartSlice";
 import { toast } from "react-hot-toast";
+import currencyFormatter from "../utils/currencyFormatter";
+
 
 const ProductCart = ({ product }) => {
   const dispatch = useDispatch();
+
   const handleOnAddToCart = () => {
     dispatch(addItem(product));
+    dispatch(addToTheTotal(product.price));
     toast.success("Item added successfully");
   };
+
   return (
-    <div className="cart relative flex flex-col my-2 border-sky-100 w-72 rounded-md shadow-md md:w-56">
+    <div className="cart relative flex flex-col my-2 border-sky-100 w-72 rounded-md shadow-md md:w-72">
       <div className="top flex items-center justify-center">
         <img className="w-[80%] h-40 px-2 py-2 md:w-[100%]  pt-4" src={product.image} />
       </div>
@@ -44,7 +49,7 @@ const ProductCart = ({ product }) => {
         </div>
         <div className="bottom flex items-center justify-between py-2">
           <div className="price">
-            <p className="font-semibold ">${product.price}</p>
+            <p className="font-semibold ">{currencyFormatter.format(product.price)}</p>
           </div>
           <button
             className="text-sm font-semibold bg-red-500 text-white rounded-sm px-2 py-1 hover:shadow-md"

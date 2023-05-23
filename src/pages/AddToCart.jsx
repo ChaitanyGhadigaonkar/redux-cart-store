@@ -1,15 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../store/cartSlice";
 import CartCard from "../components/CartCard";
 import EmptyCart from "../assets/EmptyCart.gif";
 import WestIcon from "@mui/icons-material/West";
 import { useNavigate } from "react-router-dom";
+import OrderSummery from "../components/OrderSummary"
+
+
 
 const AddToCart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  // dispatch(addItem([]));
+
+
   const navigator = useNavigate();
   const HandleGoto = () => {
     navigator("/");
@@ -17,7 +20,7 @@ const AddToCart = () => {
   return (
     <>
       {cart.length === 0 ? (
-        <div className="w-[100%] h-[80vh] flex flex-col items-center justify-center">
+        <div className="w-[100%] h-[80vh] flex flex-col items-center justify-center ">
           <h1 className="font-semibold text-xl">Your Cart is Empty!!</h1>
           <img className="w-64" src={EmptyCart} />
           <button
@@ -33,7 +36,7 @@ const AddToCart = () => {
             Your Cart
           </div>
 
-          <div className="items my-2">
+          <div className="items my-5">
             <div className="item-head grid grid-cols-[1fr_1fr_1fr_1fr] place-items-center my-1 md:grid-cols-[2fr_1fr_1fr_1fr] ">
               <h3 className="font-semibold ">Item</h3>
               <h3 className="font-semibold ">Price</h3>
@@ -43,9 +46,12 @@ const AddToCart = () => {
             <hr />
             <div className="item-container">
               {cart.map((product) => {
-                return <CartCard key={product.id} product={product} />;
+                return <CartCard key={product.id} product={product}/>;
               })}
             </div>
+          </div>
+          <div className="order flex items-center justify-center my-5">
+          <OrderSummery />
           </div>
         </div>
       )}
